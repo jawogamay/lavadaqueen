@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StatusChanged;
 use App\Transaction;
 use Auth;
 use Illuminate\Http\Request;
@@ -49,7 +50,9 @@ class TransactionController extends Controller
         $status->update([
             'status_id' => $request['status']
         ]);
+
         return $status;
+         event(new StatusChanged($transaction));
     }
     public function store(Request $request)
     {

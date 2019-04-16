@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\PostCreated;
+use App\Events\StatusChanged;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +29,15 @@ Route::get('/', function () {
 Route::get('/demo',function(){
     PostCreated::dispatch();
 });
-
+Route::get('/fire',function(){
+    event (new StatusChanged);
+});
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/private', 'HomeController@private')->name('private')->middleware('verified');;
 Route::get('/users', 'HomeController@users')->name('users');
+Route::get('/shop','HomeController@shop')->name('shop');
 Route::get('messages', 'MessageController@fetchMessages');
 Route::post('messages', 'MessageController@sendMessage');
 Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');

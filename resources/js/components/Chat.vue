@@ -1,7 +1,7 @@
 <template>
   <v-layout row>
     <v-flex class="online-users" xs3>
-      <v-list>
+      <v-list v-if="user.type ==='Laundry Shop'">
           <v-list-tile
             v-for="friend in friends"
             :color="(friend.id==activeFriend)?'green':''"
@@ -15,7 +15,30 @@
             <v-list-tile-content>
               <v-list-tile-title>{{friend.name}}</v-list-tile-title>
             </v-list-tile-content>
+           
+            <!-- <v-list-tile-avatar>
+              <img :src="item.avatar">
+            </v-list-tile-avatar> -->
+          </v-list-tile>
 
+
+        </v-list>
+
+              <v-list v-if="user.type ==='Customer'">
+          <v-list-tile
+            v-for="shop in shops"
+            :color="(friend.id==activeFriend)?'green':''"
+            :key="friend.id"
+            @click="activeFriend=friend.id"
+          >
+            <v-list-tile-action>
+              <v-icon :color="(onlineFriends.find(user=>user.id===friend.id))?'green':'red'">account_circle</v-icon>
+            </v-list-tile-action>
+
+            <v-list-tile-content>
+              <v-list-tile-title>{{shop.name}}</v-list-tile-title>
+            </v-list-tile-content>
+           
             <!-- <v-list-tile-avatar>
               <img :src="item.avatar">
             </v-list-tile-avatar> -->
@@ -110,6 +133,7 @@
         typingClock:null,
         emoStatus:false,
         users:[],
+        shops:[],
         token:document.head.querySelector('meta[name="csrf-token"]').content
 
       }
@@ -182,6 +206,14 @@
                 }
             });
         },
+        fetchShop(){
+          axios.get('/shop').then(response => {
+            this.shop = response.data;
+            if(this.friends.length>0){
+                  this.activeFriend=this.friends[0].id;
+                }
+          })
+        },
 
 
       scrollToEnd(){
@@ -214,7 +246,7 @@
 
     created(){
               this.fetchUsers();
-
+              this.fetchShop();
               Echo.join('plchat')
               .here((users) => {
                    console.log('online',users);
@@ -265,5 +297,6 @@
   overflow-y:scroll;
   height:100vh;
 }
+
 
 </style>

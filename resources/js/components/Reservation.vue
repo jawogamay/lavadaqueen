@@ -111,11 +111,13 @@ import { progressbar } from 'vue-strap'
             progressbar
         },
 
-        props: ['status', 'initial', 'order_id'],
+        props: ['status', 'initial', 'transaction_id'],
         data(){
             return{
                  customers:[],
                  transacts:'',
+                 statusNew : this.status,
+                 progress: this.initial,
                 editmode: false,
                 form: new Form({
                     id: '',
@@ -130,6 +132,11 @@ import { progressbar } from 'vue-strap'
         mounted(){
            if(this.$gate.customer()){
               this.getTransaction();
+            /*  window.Echo.private('transaction-tracker.' + this.transaction_id)
+            .listen('StatusChanged', (order) => {
+              this.statusNew = order.status_name
+              this.progress = order.status_percent
+            });*/
            }
         },
         methods:{

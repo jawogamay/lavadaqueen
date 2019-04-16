@@ -20,6 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResources(['customers' => 'API\CustomerController']);
 Route::apiResources(['posts' => 'PostController']);
 Route::get('viewpost','PostController@viewPost');
+Route::get('countCustomer','CountController@countCustomer');
+Route::get('countPost','CountController@countPost');
+Route::get('countTransaction','CountController@countTransaction');
 Route::any('statuschange/{transaction}','TransactionController@editStatus');
 Route::get('getstatus','StatusController@getStatus');
 Route::get('mytransaction','TransactionController@getCustomerTransaction');

@@ -32,13 +32,16 @@
           <td class="text-xs-left"><span  class="label label-warning">{{ props.item.status.name}}</span></td>
          
            <td class="text-xs-left" >Php{{ props.item.total}}</td>
-        <td class="text-xs-left">{{ props.item.created_at  }}</td>
+        <td class="text-xs-left">{{ props.item.created_at |myDate }}</td>
         <td class="text-xs-left">
-             <a href="#" class="btn btn-primary" @click="editModal(props.item)">
+                        <a href="#" class="btn btn-primary" @click="editModal(props.item)">
                            Transact
                         </a>
                         <a href="#" class="btn btn-warning" @click="editStatus(props.item)">
                             Status change
+                        </a>
+                        <a href="#" class="btn btn-danger" @click="editStatus(props.item)">
+                          <i class="fa fa-trash"> </i>
                         </a>
         </td>
       </template>
@@ -154,7 +157,7 @@
                  {text:'Weight' ,value:'weight'},
                  {text:'Status' ,value:'status'},
                  {text:'Total',value:'total'},
-                 { text: 'Created At', value: 'created' },
+                 { text: 'Created At', value: 'created_at' },
                  {text:'Modify' , value:'modify'}
                  ],
                 form: new Form({
@@ -188,7 +191,7 @@
              this.form.put('api/statuschange/'+this.form.id)
               .then(()=>{
                 this.$Progress.start();
-                $('#changeStatus').modal('hide')
+                 $('#changeStatus').modal('hide')
                      toast.fire(
                         'Updated!',
                         'Status has been updated.',

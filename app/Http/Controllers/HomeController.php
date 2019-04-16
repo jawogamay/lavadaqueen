@@ -25,6 +25,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function shop()
+    {
+        return User::where('type','Laundry Shop')->get();
+    }
      public function private()
     {
         return view('private');

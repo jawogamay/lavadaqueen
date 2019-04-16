@@ -1,65 +1,87 @@
 <template>
     <div class="container-fluid">
-            <div class="row pt-5" v-if="this.$gate.laundry()">
+            <div class="pt-5" v-if="this.$gate.laundry()">
+                  <div class="row">
                     <!-- Column -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card card-inverse card-primary">
                             <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-info"><i class="ti-wallet"></i></div>
-                                    <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-light">$3249</h3>
-                                        <h5 class="text-muted m-b-0">Total Revenue</h5></div>
+                                <div class="d-flex">
+                                    <div class="m-r-20 align-self-center">
+                                        <h1 class="text-white"><i class="ti-user"></i></h1>
+                                    </div>
+                                    <div>
+                                        <h3 class="card-title">Customer</h3>
+                                        <h6 class="card-subtitle">2019</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 align-self-center">
+                                        <h2 class="font-light text-white">{{customers}}</h2>
+                                    </div>
+                                    <div class="col-8 p-t-10 p-b-20 align-self-center">
+                                        <div class="usage chartist-chart" style="height:65px"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Column -->
                     <!-- Column -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card card-inverse card-success">
                             <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-warning"><i class="mdi mdi-cellphone-link"></i></div>
-                                    <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">$2376</h3>
-                                        <h5 class="text-muted m-b-0">Online Revenue</h5></div>
+                                <div class="d-flex">
+                                    <div class="m-r-20 align-self-center">
+                                        <h1 class="text-white"><i class="ti-thought"></i></h1>
+                                    </div>
+                                    <div>
+                                        <h3 class="card-title">Post</h3>
+                                        <h6 class="card-subtitle">2019</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 align-self-center">
+                                        <h2 class="font-light text-white">{{posts}}</h2>
+                                    </div>
+                                    <div class="col-8 p-t-10 p-b-20 text-right">
+                                        <div class="spark-count" style="height:65px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-4 col-md-4">
+                        <div class="card card-inverse card-warning">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="m-r-20 align-self-center">
+                                        <h1 class="text-white"><i class="ti-thought"></i></h1>
+                                    </div>
+                                    <div>
+                                        <h3 class="card-title">Transaction</h3>
+                                        <h6 class="card-subtitle">2019</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 align-self-center">
+                                        <h2 class="font-light text-white">{{transactions}}</h2>
+                                    </div>
+                                    <div class="col-8 p-t-10 p-b-20 text-right">
+                                        <div class="spark-count" style="height:65px"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Column -->
                     <!-- Column -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-cart-outline"></i></div>
-                                    <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">$1795</h3>
-                                        <h5 class="text-muted m-b-0">Offline Revenue</h5></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
                     <!-- Column -->
-                    <!-- Column -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
-                                    <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">$687</h3>
-                                        <h5 class="text-muted m-b-0">Ad. Expense</h5></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-
                 </div>
-                  <full-calendar :events="fcEvents" locale="en"></full-calendar>
+
+             </div>
+            <full-calendar :events="fcEvents" locale="en"></full-calendar>
     </div>
 </template>
 <script type="text/javascript">
@@ -79,14 +101,41 @@
 export default {
   data () {
     return {
-      fcEvents : demoEvents
+      fcEvents : demoEvents,
+      customers: [],
+      posts:[],
+      transactions:[]
+
     }
   },
   mounted(){
-
+    if(this.$gate.laundry()){
+        this.countCustomer();
+        this.countPost();
+        this.countTransaction();
+    }
   },
   components : {
     'full-calendar': require('vue-fullcalendar')    
+  },
+  methods:{
+    countCustomer(){
+        axios.get('api/countCustomer').then(({data}) => {
+            this.customers = data;
+        })
+    },
+    countPost(){
+        axios.get('api/countPost').then(({data}) => {
+            this.posts = data;
+        })
+    },
+    countTransaction(){
+        axios.get('api/countTransaction').then(({data}) => {
+            this.transactions = data;
+        })
+    },
+
+
   }
 };
 </script>
