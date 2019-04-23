@@ -8,7 +8,7 @@
                    {{post.content}}
                 </p>
                      <div class="d-flex">
-                    <div class="read"><a href="javascript:void(0)" class="link font-medium">View Profile</a></div>
+                    <div class="read"><router-link to="/profile" class="link font-medium">View Profile</router-link></div>
                     <div class="ml-auto">
                          <a href="javascript:void(0)" class="link m-r-10 " data-toggle="tooltip" title="Like"><i class="mdi mdi-heart-outline"></i></a>
                 </div>

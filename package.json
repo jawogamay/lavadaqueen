@@ -34,6 +34,7 @@
         "vue-fullcalendar": "^1.0.9",
         "vue-progressbar": "^0.7.5",
         "vue-router": "^3.0.2",
+        "vue-star-rating": "^1.6.1",
         "vue-strap": "github:wffranco/vue-strap",
         "vue-upload-component": "^2.8.20",
         "vue2-google-maps": "^0.10.6",

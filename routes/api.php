@@ -27,3 +27,5 @@ Route::any('statuschange/{transaction}','TransactionController@editStatus');
 Route::get('getstatus','StatusController@getStatus');
 Route::get('mytransaction','TransactionController@getCustomerTransaction');
 Route::apiResources(['transactions' => 'TransactionController']);
+Route::post('rating','RateController@setrating')->name('setrating');
+Route::get('getrate','RateController@getrate')->name('getrate');

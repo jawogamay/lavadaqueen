@@ -21,11 +21,15 @@ import Appointment from './components/Appointment'
 import Dashboard from './components/Dashboard'
 import VueProgressBar from 'vue-progressbar'
 import Reservation from './components/Reservation'
+import Profile from './components/Profile'
 import { Form, HasError, AlertError } from 'vform';
 import fullCalendar from 'vue-fullcalendar'
 import moment from 'moment'
+import StarRating from 'vue-star-rating'  
 Vue.component('full-calendar', fullCalendar)
+Vue.component('star-rating', StarRating);
 /*import * as VueGoogleMaps from 'vue2-google-maps'
+
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -107,7 +111,8 @@ window.Fire =  new Vue();
     {path:'/posts',component:Post},
     {path:'/appointments',component:Appointment},
     {path:'/dashboard',component:Dashboard},
-    {path:'/reservation',component:Reservation}
+    {path:'/reservation',component:Reservation},
+    {path:'/profile',component:Profile}
     
   ]
 
