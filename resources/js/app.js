@@ -22,6 +22,7 @@ import Dashboard from './components/Dashboard'
 import VueProgressBar from 'vue-progressbar'
 import Reservation from './components/Reservation'
 import Profile from './components/Profile'
+import Setting from './components/Setting'
 import { Form, HasError, AlertError } from 'vform';
 import fullCalendar from 'vue-fullcalendar'
 import moment from 'moment'
@@ -112,7 +113,8 @@ window.Fire =  new Vue();
     {path:'/appointments',component:Appointment},
     {path:'/dashboard',component:Dashboard},
     {path:'/reservation',component:Reservation},
-    {path:'/profile',component:Profile}
+    {path:'/profile',component:Profile},
+    {path:'/setting',component:Setting}
     
   ]
 

@@ -195,12 +195,12 @@
                 <!-- User profile -->
                 <div class="user-profile" style="background: url(/assets/images/background/user-info.jpg) no-repeat;">
                     <!-- User profile image -->
-                    <div class="profile-img"> <img src="/assets/images/users/profile.png" alt="user" /> </div>
+                    <div class="profile-img"> <img src="/assets/images/users/prof.png" alt="user" /> </div>
                     <!-- User profile text-->
                     <div class="profile-text"> <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{Auth::user()->name}}</a>
-                        <div class="dropdown-menu animated flipInY"> <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                        <div class="dropdown-menu animated flipInY">
                          <a href="/private" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-                            <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                            <div class="dropdown-divider"></div> <a href="/setting" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                             <div class="dropdown-divider"></div> <a href="{{ route('logout') }}"
                                   onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
@@ -278,7 +278,7 @@
             <!-- End Sidebar scroll-->
             <!-- Bottom points-->
             <div class="sidebar-footer">
-                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+                <!-- item--><a href="/setting" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
                 <!-- item--><a href="{{route('private')}}" class="link" data-toggle="tooltip" title="Message"><i class="mdi mdi-message"></i></a>
                 <!-- item--><a  href="{{ route('logout') }}"
                                   onclick="event.preventDefault();

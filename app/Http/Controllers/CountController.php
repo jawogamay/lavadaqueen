@@ -14,15 +14,15 @@ class CountController extends Controller
         $this->middleware('auth:api');
     }
     public function countPost(){
-        if(\Gate::allows('laundry')){
+        
             return Post::count();
-        }
+        
         
     }
     public function countCustomer(){
-        if(\Gate::allows('laundry')){
+        
             return User::where('type','Customer')->count();
-        }
+        
     }
     public function countTransaction(){
         if(\Gate::allows('laundry')){

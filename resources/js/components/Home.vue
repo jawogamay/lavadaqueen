@@ -1,8 +1,12 @@
 <template>
     <div class="container" v-if="$gate.customer()">
       <div class="card-body mt-5" v-for="post in posts">
-        <div class="blog-image"><img src="/assets/images/lavada.jpg" alt="img" class="img-responsive"/></div>
-            <h2>{{post.title}}</h2>
+        <div class="blog-image">
+            
+            <img :src="post.image" alt="img" class="img-responsive"/>
+        </div>
+        <br>
+            <h1>{{post.title}}</h1>
                 <label class="label label-rounded label-success">{{post.user.name}}</label>
                 <p class="m-t-20 m-b-20">
                    {{post.content}}

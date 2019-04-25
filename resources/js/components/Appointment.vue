@@ -118,6 +118,7 @@
                         <div class="modal-body">
                            <h3 style="display:inline;"> Current Status:</h3> &nbsp;<span style="display:inline; color:blue;"><b>{{ this.form.current}}</b></span>
                            <br>
+                           <input type="hidden" name="user" :value="form.user">
                              <select name="status" class="form-control" v-model="form.status">
                                 <option v-for="status in statuses" :key="status.id" :value="status.id">{{status.name}}</option>
                 
@@ -167,7 +168,8 @@
                     weight:'',
                     total:'',
                     status:'',
-                    current:''
+                    current:'',
+                    user:'',
                    
                     
                 })
@@ -204,6 +206,7 @@
             editStatus(changestatus){
               this.form.id = changestatus.id
               this.form.current = changestatus.status.name
+              this.form.user = changestatus.user_id
               this.form.status = changestatus.status
                 $('#changeStatus').modal('show')
             },

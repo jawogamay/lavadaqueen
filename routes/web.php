@@ -26,6 +26,15 @@ Route::get('/', function () {
      /*PostCreated::dispatch(new Post(2));*/
     return view('welcome');
 });
+Route::get('/about-us',function(){
+    return view('about');
+});
+Route::get('/services',function(){
+    return view ('services');
+});
+Route::get('/contacts',function(){
+    return view('contact');
+});
 Route::get('/demo',function(){
     PostCreated::dispatch();
 });
@@ -35,6 +44,7 @@ Route::get('/fire',function(){
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
 Route::get('/private', 'HomeController@private')->name('private')->middleware('verified');;
 Route::get('/users', 'HomeController@users')->name('users');
 Route::get('/shop','HomeController@shop')->name('shop');

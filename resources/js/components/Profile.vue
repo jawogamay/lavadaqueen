@@ -13,10 +13,10 @@
                             
                                 <div class="row text-center m-t-20">
                                     <div class="col-lg-4 col-md-4 m-t-20">
-                                        <h3 class="m-b-0 font-light">1099</h3><small>Post</small>
+                                        <h3 class="m-b-0 font-light">{{posts}}</h3><small>Post</small>
                                     </div>
                                     <div class="col-lg-4 col-md-4 m-t-20">
-                                        <h3 class="m-b-0 font-light">23,469</h3><small>Customers</small>
+                                        <h3 class="m-b-0 font-light">{{customers}}</h3><small>Customers</small>
                                     </div>
                                   
 
@@ -63,7 +63,7 @@
                                             </div>
                                             <div class="col-md-3 col-xs-6 b-r"> <strong>Email</strong>
                                                 <br>
-                                                <p class="text-muted">johnathan@admin.com</p>
+                                                <p class="text-muted">lavada@gmail.com</p>
                                             </div>
                                             <div class="col-md-3 col-xs-6"> <strong>Location</strong>
                                                 <br>
@@ -113,6 +113,8 @@
          data(){
             return{
                 added: false,
+                customers:[],
+                posts:[],
                 rates:0,
                 form:new Form({
                     rating: 0,
@@ -123,8 +125,20 @@
          created(){
             this.getRating();
             this.createdRating();
+            this.countCustomer();
+             this.countPost();
          },
          methods:{
+            countPost(){
+        axios.get('api/countPost').then(({data}) => {
+            this.posts = data;
+        })
+         },
+         countCustomer(){
+        axios.get('api/countCustomer').then(({data}) => {
+            this.customers = data;
+        })
+         },
          setRating(){
 
             this.form.post('api/rating').then((response) => {

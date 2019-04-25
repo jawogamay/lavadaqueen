@@ -44,6 +44,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+         $explode = explode(',', $request['image']);
+        $decode = base64_decode($explode[1]);
+        if(str_contains($explode[0],'jpeg'))
+            $extension = 'jpg';
+        else
+            $extension = 'png';
+        $fileName = str_random().'.'.$extension;
+        $path = public_path().'/'.$fileName;
+        file_put_contents($path, $decode);
         $this->validate($request,[
             'content' => 'required|min:10|max:250',
             'title' => 'required|min:5'
@@ -52,7 +61,8 @@ class PostController extends Controller
         $post =  Post::create([
             'user_id' => Auth::user()->id,
             'content' => $request['content'],
-            'title' => $request['title']
+            'title' => $request['title'],
+            'image' => $fileName
 
         ]);
       
