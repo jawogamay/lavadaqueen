@@ -79,7 +79,7 @@ return [
         ],
 
         'pgsql_production' => [
-            'driver' => 'pgsql'
+            'driver' => 'pgsql',
             'host' => $host,
             'database' => $database,
             'username' => $username
@@ -88,7 +88,7 @@ return [
             'prefix' => '',
             'schema'=> 'pubic'
         ],
-        
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'host' => env('DB_HOST', 'localhost'),
