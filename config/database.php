@@ -82,9 +82,9 @@ return [
             'driver' => 'pgsql',
             'host' => $host,
             'database' => $database,
-            'username' => $username
+            'username' => $username,
             'password' => $password,
-            'charset' => 'utf8'
+            'charset' => 'utf8',
             'prefix' => '',
             'schema'=> 'pubic'
         ],
