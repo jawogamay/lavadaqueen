@@ -257,10 +257,10 @@
                             </li>
                             @can('customer')
                             <li class="nav-item">
-                                <a href="/reservation" class="nav-link">
+                                <router-link to="/reservation" class="nav-link">
                                     <i class="nav-icon fas fa-book"></i>
                                         Transaction
-                                </a>
+                                </router-link>
                                </li>
                                 <li class="nav-item">
                                 <router-link to="/googlemap" class="nav-link">
