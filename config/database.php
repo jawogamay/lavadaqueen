@@ -64,7 +64,7 @@ return [
             ]) : [],
         ],
 
-        'pgsql_production' => [
+        'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
@@ -78,6 +78,17 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'pgsql_production' => [
+            'driver' => 'pgsql'
+            'host' => $host,
+            'database' => $database,
+            'username' => $username
+            'password' => $password,
+            'charset' => 'utf8'
+            'prefix' => '',
+            'schema'=> 'pubic'
+        ],
+        
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'host' => env('DB_HOST', 'localhost'),
@@ -89,6 +100,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
+        
 
     ],
 
