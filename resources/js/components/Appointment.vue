@@ -40,7 +40,7 @@
                         <a href="#" class="btn btn-warning" @click="editStatus(props.item)">
                             Status change
                         </a>
-                        <a href="#" class="btn btn-danger" @click="editStatus(props.item)">
+                        <a href="#" class="btn btn-danger" @click="deleteAppointment(props.item.id)">
                           <i class="fa fa-trash"> </i>
                         </a>
         </td>
@@ -156,7 +156,7 @@
                  },
                  {text:'Service', value:'service'},
                  {text:'Weight' ,value:'weight'},
-                 {text:'Status' ,value:'status'},
+                 {text:'Status' ,value:'status.name'},
                  {text:'Total',value:'total'},
                  { text: 'Created At', value: 'created_at' },
                  {text:'Modify' , value:'modify'}
@@ -193,14 +193,40 @@
              this.form.put('api/statuschange/'+this.form.id)
               .then(()=>{
                 this.$Progress.start();
+
                  $('#changeStatus').modal('hide')
                      toast.fire(
                         'Updated!',
                         'Status has been updated.',
                         'success'
                         )
+                       Fire.$emit('statusChanged')
                      this.$Progress,finish();
-                     Fire.$emit('statusChanged')
+                   
+              })
+            },
+            deleteAppointment(id){
+              swal.fire({
+                 title: 'Are you sure?',
+                 text: "You won't be able to revert this!",
+                 type: 'warning',
+                 showCancelButton: true,
+                 confirmButtonColor: '#3085d6',
+                 cancelButtonColor: '#d33',
+                 confirmButtonText: 'Yes, delete it!'
+              }).then((result) => {
+                      if (result.value) {
+                                this.form.delete('api/transactions/'+id).then(()=>{
+                                        swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                        )
+                                    Fire.$emit('statusChanged');
+                                }).catch(()=> {
+                                    swal.fire("Failed!", "There was something wronge.", "warning");
+                                });
+                         }
               })
             },
             editStatus(changestatus){
@@ -229,8 +255,9 @@
                         'Transaction has been updated.',
                         'success'
                         )
+                       Fire.$emit('statusChanged')
                      this.$Progress,finish();
-                     Fire.$emit('statusChanged')
+                   
 
               }).catch((err)=>{
                 console.log(err);

@@ -42,7 +42,7 @@
  #floating-panel {
         position: absolute;
         top: 150px;
-        left: 5%;
+        left: 11%;
         z-index: 5;
         background-color: #fff;
         padding: 5px;
@@ -290,71 +290,22 @@
 
        <div class="page-wrapper">
 
-         <div id="floating-panel">
-     <!--  <input id="latlng" type="text" value="40.714224,-73.961452"> -->
-     <select id="latlng" class="form-control">
-       <option value="" disabled selected> Locate Branches</option>
-        <option value="10.3139,123.9012"> 1F SOTTO BRANCH</option>
-        <option value="10.3180255,123.9043779,19"> AYALA BRANCH </option>
-     </select>
-      <input id="submit" type="button" value="FIND NOW" class="btn btn-success">
-
+        <div id="floating-panel">
+    <b>Start: </b>
+    <select id="start" class="form-control">
+     <option value="Cebu City">City Hall</option>
+      
+    </select>
+    <b>End: </b>
+    <select id="end" class="form-control">
+      <option value="Lavada Queen Inc. [The Professional Laundry & Cleaners]">1F Sotto Branch</option>
+      <option value="Basement 2, Ayala Center Cebu, Cebu City, 6000 Cebu">Ayala Branch</option>
+    </select>
     </div>
     <div id="map"></div>
-
-    <div class="">
-        <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
-    </div>
-       <div class="right-sidebar">
-                    <div class="slimscrollright">
-                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
-                        <div class="r-panel-body">
-                            <ul id="themecolors" class="m-t-20">
-                                <li><b>With Light sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
-                                <li><a href="javascript:void(0)" data-theme="indigo" class="indigo">2</a></li>
-                                <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
-                                <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
-                                <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
-                            </ul>
-                           {{--  <ul class="m-t-20 chatonline">
-                                <li><b>Chat option</b></li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/1.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/2.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/3.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/4.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/5.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/6.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/7.jpg" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/8.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
-                                </li>
-                            </ul> --}}
-                        </div>
-                    </div>
-                </div>
+    &nbsp;
+    <div id="warnings-panel"></div>
+   
   </div>
         <!-- ============================================================== -->
  <!-- ============================================================== -->
@@ -412,39 +363,83 @@
     <!-- ============================================================== -->
     <script src="/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
      <script>
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: {lat:10.3157, lng: 123.8854}
-        });
-        var geocoder = new google.maps.Geocoder;
-        var infowindow = new google.maps.InfoWindow;
+       function initMap() {
+        var markerArray = [];
 
-        document.getElementById('submit').addEventListener('click', function() {
-          geocodeLatLng(geocoder, map, infowindow);
+        // Instantiate a directions service.
+        var directionsService = new google.maps.DirectionsService;
+
+        // Create a map and center it on Manhattan.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 40.771, lng: -73.974}
+        });
+
+        // Create a renderer for directions and bind it to the map.
+        var directionsDisplay = new google.maps.DirectionsRenderer({map: map});
+
+        // Instantiate an info window to hold step text.
+        var stepDisplay = new google.maps.InfoWindow;
+
+        // Display the route between the initial start and end selections.
+        calculateAndDisplayRoute(
+            directionsDisplay, directionsService, markerArray, stepDisplay, map);
+        // Listen to change events from the start and end lists.
+        var onChangeHandler = function() {
+          calculateAndDisplayRoute(
+              directionsDisplay, directionsService, markerArray, stepDisplay, map);
+        };
+        document.getElementById('start').addEventListener('change', onChangeHandler);
+        document.getElementById('end').addEventListener('change', onChangeHandler);
+      }
+      
+      function calculateAndDisplayRoute(directionsDisplay, directionsService,
+          markerArray, stepDisplay, map) {
+        // First, remove any existing markers from the map.
+        for (var i = 0; i < markerArray.length; i++) {
+          markerArray[i].setMap(null);
+        }
+
+        // Retrieve the start and end locations and create a DirectionsRequest using
+        // WALKING directions.
+        directionsService.route({
+          origin: document.getElementById('start').value,
+          destination: document.getElementById('end').value,
+          travelMode: 'WALKING'
+        }, function(response, status) {
+          // Route the directions and pass the response to a function to create
+          // markers for each step.
+          if (status === 'OK') {
+            document.getElementById('warnings-panel').innerHTML =
+                '<b>' + response.routes[0].warnings + '</b>';
+            directionsDisplay.setDirections(response);
+            showSteps(response, markerArray, stepDisplay, map);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
         });
       }
 
-      function geocodeLatLng(geocoder, map, infowindow) {
-        var input = document.getElementById('latlng').value;
-        var latlngStr = input.split(',', 2);
-        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
-        geocoder.geocode({'location': latlng}, function(results, status) {
-          if (status === 'OK') {
-            if (results[0]) {
-              map.setZoom(19);
-              var marker = new google.maps.Marker({
-                position: latlng,
-                map: map
-              });
-              infowindow.setContent(results[0].formatted_address);
-              infowindow.open(map, marker);
-            } else {
-              window.alert('No results found');
-            }
-          } else {
-            window.alert('Geocoder failed due to: ' + status);
-          }
+      function showSteps(directionResult, markerArray, stepDisplay, map) {
+        // For each step, place a marker, and add the text to the marker's infowindow.
+        // Also attach the marker to an array so we can keep track of it and remove it
+        // when calculating new routes.
+        var myRoute = directionResult.routes[0].legs[0];
+        for (var i = 0; i < myRoute.steps.length; i++) {
+          var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
+          marker.setMap(map);
+          marker.setPosition(myRoute.steps[i].start_location);
+          attachInstructionText(
+              stepDisplay, marker, myRoute.steps[i].instructions, map);
+        }
+      }
+
+      function attachInstructionText(stepDisplay, marker, text, map) {
+        google.maps.event.addListener(marker, 'click', function() {
+          // Open an info window when the marker is clicked on, containing the text
+          // of the step.
+          stepDisplay.setContent(text);
+          stepDisplay.open(map, marker);
         });
       }
     </script>

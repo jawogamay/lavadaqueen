@@ -36,8 +36,8 @@
 
         <td class="text-xs-left">
       
-                        <a href="#" @click="deletePost(props.item.id)">
-                            <i class="fa fa-trash" style="color:red;"></i>
+                        <a href="#" class="btn btn-danger" @click="deletePost(props.item.id)">
+                            <i class="fa fa-trash" style="color:#ffffff;"></i>
 
                         </a>
         </td>
@@ -159,14 +159,14 @@
                         // Send request to the server
                          if (result.value) {
                                 this.form.delete('api/posts/'+id).then(()=>{
-                                        swal(
+                                        swal.fire(
                                         'Deleted!',
                                         'Your file has been deleted.',
                                         'success'
                                         )
-                                    Fire.$emit('createdPet');
+                                    Fire.$emit('createdPost');
                                 }).catch(()=> {
-                                    swal("Failed!", "There was something wronge.", "warning");
+                                    swal.fire("Failed!", "There was something wronge.", "warning");
                                 });
                          }
                     })

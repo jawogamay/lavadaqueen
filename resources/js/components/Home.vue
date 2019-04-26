@@ -30,13 +30,14 @@
         created(){
             if(this.$gate.customer()){
                 this.viewPost();
-                window.Echo.channel('posts').listen('PostCreated',({post}) => this.addPost(post));
+
             }
         },
         methods:{
             viewPost(){
                 axios.get('api/viewpost').then(({data}) => this.posts = data)
-            }
+            },
+          
         }
     };
 </script>

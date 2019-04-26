@@ -52,8 +52,8 @@ class TransactionController extends Controller
         $status->update([
             'status_id' => $request['status']
         ]);
-        $transaction = Transaction::find(4);
-        User::find($transaction->user->id)->notify(new TransactionChanged());
+     /*   $transaction = Transaction::find(4);
+        User::find($transaction->user->id)->notify(new TransactionChanged());*/
         return $status;
 
 
@@ -161,8 +161,13 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
-        //
+
+        $this->authorize('laundry');
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+        return ['message' => 'Transaction deleted'];
+
     }
 }
