@@ -20,6 +20,7 @@ class SeedUsersTable extends Migration
             'type' => 'Laundry Shop',
             'email' => 'lavada@gmail.com',
             'phone' => '09472195796',
+            'type' => 'Laundry Shop',
             'email_verified_at' => NOW(),
             'password' => Hash::make('admin123')
         ]);
