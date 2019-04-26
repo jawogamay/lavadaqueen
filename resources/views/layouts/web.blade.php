@@ -22,6 +22,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Logo-font --><link href="//fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,600,700" rel="stylesheet">
 <!-- Body-font --><link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 <!-- Headings-font --><link href="//fonts.googleapis.com/css?family=Cabin+Sketch:400,700" rel="stylesheet">
+ <link rel="manifest" href="/manifest.json">
 <!--//web-fonts-->
 <!--//fonts-->
 <!-- js -->
@@ -141,7 +142,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
 
-    <!-- //smooth scrolling -->
+ <script src="/js/app.js"></script>
 <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="/js/modernizr-2.6.2.min.js"></script>
 <script type="text/javascript" src="/js/jquery.zoomslider.min.js"></script>
