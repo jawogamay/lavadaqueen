@@ -53,7 +53,7 @@ Route::post('messages', 'MessageController@sendMessage');
 Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
 Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
 Route::get('/googlemap',function(){
-    return view('map');x
+    return view('map');
 });
 Route::get('/{path}',"HomeController@index")->where( 'path', '.*' );
 
