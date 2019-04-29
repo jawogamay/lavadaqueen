@@ -9,6 +9,7 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Nexmo;
 
 class TransactionController extends Controller
 {
@@ -26,7 +27,7 @@ class TransactionController extends Controller
          if (\Gate::allows('laundry')) 
          {
             
-            return Transaction::latest()->with('customer','status')->get();
+            return Transaction::latest()->with('customer','status','service')->get();
         }
     }
 
@@ -54,8 +55,68 @@ class TransactionController extends Controller
         ]);
      /*   $transaction = Transaction::find(4);
         User::find($transaction->user->id)->notify(new TransactionChanged());*/
-        return $status;
+       
+        $phone = json_decode($status->customer->phone,true);
+        
+        $st = $status->status_id;
+        
 
+        if($st == 2)
+        {
+            $text = Nexmo::message()->send([
+            'to'   => $phone,
+            'from' => '639472195796',
+            'text' => 'You have been approved'
+         ]); 
+        }
+        else if($st == 3){
+               $text = Nexmo::message()->send([
+            'to'   => $phone,
+            'from' => '639472195796',
+            'text' => 'Current Status: Order Placed'
+         ]); 
+        }
+        else if ($st == 4){
+            $text = Nexmo::message()->send([
+            'to'   => $phone,
+            'from' => '639472195796',
+            'text' => 'Current Status: Washing'
+         ]); 
+        }
+        else if($st==5){
+                $text = Nexmo::message()->send([
+            'to'   => $phone,
+            'from' => '639472195796',
+            'text' => 'Current Status: Drying'
+         ]); 
+        }
+        else if($st == 6){
+                $text = Nexmo::message()->send([
+            'to'   => $phone,
+            'from' => '639472195796',
+            'text' => 'Current Status: Quality Check'
+         ]); 
+        }
+        else if($st ==7){
+                $text = Nexmo::message()->send([
+            'to'   => $phone,
+            'from' => '639472195796',
+            'text' => 'Your laundry clothes is out for delivery'
+         ]); 
+        }
+        return $phone;
+      
+        
+     /*   $st = $status->status_id;
+        $phone = $status->customer->phone;
+        if($st === 4){
+             Nexmo::message()->send([
+             'to'   => $phone,
+            'from' => '639472195796',
+            'text' => $name.'add a reservation'
+            ]); 
+        }*/
+      
 
     }
     public function store(Request $request)
@@ -63,11 +124,11 @@ class TransactionController extends Controller
         //
         $this->validate($request,[
             'service' => 'required',
-            'date_reserve' => 'date|after:tomorrow'
+            'date_reserve' => 'date|date_format:Y-m-d|after:tomorrow'
         ]);
         $user = Auth::user()->id;
         return Transaction::create([
-            'service' => $request['service'],
+            'service_id' => (int)$request['service'],
             'date_reserve' => $request['date'],
             'user_id' => $user
         ]);
@@ -86,7 +147,7 @@ class TransactionController extends Controller
     public function getCustomerTransaction(){
         if (\Gate::allows('customer')){
             $id = Auth::user()->id;
-            return Transaction::where('user_id',$id)->latest()->with('status')->get();
+            return Transaction::where('user_id',$id)->latest()->with('status','service')->get();
         } 
     }
 

@@ -18,9 +18,9 @@ class TransactionChanged extends Notification
      *
      * @return void
      */
-    public function __construct(Transaction $transaction)
+    public function __construct()
     {
-        $this->transaction = $transaction;
+        //$this->transaction = $transaction;
     }
 
     /**
@@ -42,8 +42,8 @@ class TransactionChanged extends Notification
      */
     public function toDatabase($notifiable)
     {
-        return [
-            'transaction' => $this->transaction
+         return [
+            'data' => 'Status Changed'
         ];
     }
 
@@ -56,7 +56,7 @@ class TransactionChanged extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'data' => 'Status Changed'
         ];
     }
 }

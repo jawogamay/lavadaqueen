@@ -28,8 +28,9 @@
                             <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
+                            <div class="col-md-6 form-text">
+                                <input id="phone" type="number" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" id="youridhere" style="width:100%;" required autofocus>
+                                   <label for="youridhere" class="static-value">+639</label>
 
                                 @if ($errors->has('phone'))
                                     <span class="invalid-feedback" role="alert">

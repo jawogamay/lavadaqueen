@@ -16,15 +16,25 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row p-t-10 p-b-10">
-                                    <!-- Column -->
+                                    
                                     <div class="col p-r-0">
-                                        <h3 class="font-light">Php{{transact.total}}</h3>
-                                        <h6 class="text-muted">{{transact.service}}</h6>
+                                        <h3>Price: P<span style="font-size:19px;">{{transact.service.price}}</span> <span style="font-size:12px;">/kilo</span></h3>
+                                        <h4 class="font-light">Php{{transact.total}}</h4>
+                                        <h6 class="text-muted">{{transact.service.servicetype}}</h6>
                                         <span class="label label-primary">{{transact.status.name}}</span>
                                     </div>
                                     <!-- Column -->
                                     <div class="col text-right align-self-center">
-                                        <div data-label="100%" class="css-bar m-b-0 css-bar-danger css-bar-100"><i class="mdi mdi-briefcase-check"></i></div>
+                                        <v-progress-circular
+                                          :rotate="270"
+                                          :size="100"
+                                          :width="15"
+                                          :value="transact.status.percent"
+                                          color="pink"
+                                        >
+                                         {{transact.status.percent}}
+                                        </v-progress-circular>
+ 
                                         <br><br>
                                         <button class="btn btn-danger" @click= "viewTransact(transact)">Full Details </button>
                                     </div>
@@ -43,16 +53,12 @@
                         </div>
                        <form @submit.prevent="createTransaction()">
                         <div class="modal-body">
-                            <input type="date" name="date" v-model="form.date" class="form-control" :class="{'is-invalid': form.errors.has('date') }">
+                            <input @change="checkDate()" id="datepicker" type="date" data-date-format="yyyy-mm-dd" name="date" v-model="form.date" class="form-control" :class="{'is-invalid': form.errors.has('date') }">
                             <has-error :form="form" field="date"></has-error>
                             <br><br>
                             <select name="service"  v-model="form.service" class="form-control" required :class="{'is-invalid': form.errors.has('service') }">
-                                <option value="" disabled selected>------------ Choose service ---------------</option>
-                                <option value="Fullservice">Full Service</option>
-                                <option value="Finelinen">Fine Linen & Table Clothes</option>
-                                <option value="Vintage">Bridal and Vintage Items</option>
-                                <option value="Garment">Garment Repair & Alteration</option>
-                                <option value="Carpet">Carpet & Upholster Cleaning</option>
+                                <option value="" disabled selected>--Choose service --</option>
+                                <option v-for="service in services" :value="service.id">{{service.servicetype}}</option>
                             </select>
                             <has-error :form="form" field="service"></has-error>
                             <br><br>
@@ -83,7 +89,7 @@
                                 <h5 style="display:inline;"><b>Weight :</b> </h5><span style="display:inline;color:green;"><b> {{form.weight}}kg </b></span>
                             </div>
                              <div>
-                                <h5 style="display:inline;"><b>Service :</b> </h5><span style="display:inline;color:indigo;"><b> {{form.service}}</b></span>
+                                <h5 style="display:inline;"><b>Service :</b> </h5><span style="display:inline;color:indigo;"><b> {{form.servicetype}}</b></span>
                             </div>
                             <br><br>
                               <div class="progress">
@@ -115,6 +121,7 @@ import { progressbar } from 'vue-strap'
         data(){
             return{
                  customers:[],
+                 services:[],
                  transacts:'',
                  statusNew : this.status,
                  progress: this.initial,
@@ -125,7 +132,8 @@ import { progressbar } from 'vue-strap'
                     status:'',
                     percent:'',
                     date:'',
-                    weight:''
+                    weight:'',
+                    servicetype:'',
                 })
             }
         },
@@ -137,6 +145,8 @@ import { progressbar } from 'vue-strap'
               this.statusNew = order.status_name
               this.progress = order.status_percent
             });*/
+            this.viewService()
+
            }
         },
         methods:{
@@ -145,14 +155,25 @@ import { progressbar } from 'vue-strap'
                 this.form.reset();
                 $('#addNew').modal('show');
             },
+            viewService(){
+              axios.get('api/services').then(({data}) => this.services = data);
+            },
             viewTransact(transact){
-                this.form.service = transact.service
+                this.form.servicetype = transact.service.servicetype
                 this.form.status = transact.status.name;
                 this.form.percent = transact.status.percent
                 this.form.date = transact.date_reserve
                 this.form.weight = transact.weight
                 $('#viewdetails').modal('show')
             },
+           checkDate() {
+              var selectedText = document.getElementById('datepicker').value;
+              var selectedDate = new Date(selectedText);
+              var now = new Date();
+              if (selectedDate < now) {
+               alert("Date must be in the future");
+            }
+         },
             getTransaction(){
                 axios.get('api/mytransaction').then(({data}) => this.transacts = data)
             },

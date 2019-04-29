@@ -39,27 +39,93 @@
 <![endif]-->
 <style type="text/css">
    
- #floating-panel {
-        position: absolute;
-        top: 150px;
-        left: 11%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
 
-      #latlng {
-        width: 225px;
-      }
-      #map {
+
+  #map {
         height: 100vh;
       }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+    /*  #origin-input{
+    z-index: 0;
+    position: absolute;
+    top: 0px;
+    left: 53px;
+      }
+      #destination-input{
+        z-index: 0;
+    position: absolute;
+    left: 53px;
+    top: 47px;
+      }
+*/
+ #origin-input{
+      background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: -31%;
+        margin-top: 25%;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 200px;
+ }
+ #destination-input{
+      background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: -53%;
+        margin-top: 40%;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 200px;
+ }
+     /* #origin-input,
+      #destination-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        margin-top: 120px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 200px;
+      }
+*/
+      #origin-input:focus,
+      #destination-input:focus {
+        border-color: #4d90fe;
+      }
 
+      #mode-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        margin-left: -58%;
+         margin-top: 51%;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #mode-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
 
 </style>
 </head>
@@ -86,24 +152,7 @@
                 <!-- ============================================================== -->
                 <!-- Logo -->
                 <!-- ============================================================== -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                        <b>
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span>
-                         <!-- dark Logo text -->
-                         <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                         <!-- Light Logo text -->    
-                         <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
-                </div>
+             
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
@@ -175,10 +224,7 @@
                         <!-- ============================================================== -->
                         <!-- Language -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right scale-up"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
-                        </li>
+                     
                     </ul>
                 </div>
             </nav>
@@ -235,6 +281,7 @@
                                         Post
                                 </router-link>
                             </li>
+        
                               <li class="nav-item">
                                 <router-link to="/appointments" class="nav-link">
                                     <i class="nav-icon fas fa-book"></i>
@@ -290,7 +337,7 @@
 
        <div class="page-wrapper">
 
-        <div id="floating-panel">
+      {{--   <div id="floating-panel">
     <b>Start: </b>
     <select id="start" class="form-control">
      <option value="Cebu City">City Hall</option>
@@ -301,10 +348,32 @@
       <option value="Lavada Queen Inc. [The Professional Laundry & Cleaners]">1F Sotto Branch</option>
       <option value="Basement 2, Ayala Center Cebu, Cebu City, 6000 Cebu">Ayala Branch</option>
     </select>
+    </div> --}}
+    <div style="display: none" class="container">
+        <input id="origin-input" class="controls form-control org" type="text" style="top:0px;left:0px;" 
+            placeholder="Enter an origin location">
+            <br>
+
+            <select id="destination-input" class="controls form-control">
+             <option value="Lavada Queen Inc. [The Professional Laundry & Cleaners]">Select Branchs</option>
+               
+             </select>
+
+        <div id="mode-selector" class="controls">
+          <input type="radio" name="type" id="changemode-walking" checked="checked">
+          <label for="changemode-walking">Walking</label>
+
+          <input type="radio" name="type" id="changemode-transit">
+          <label for="changemode-transit">Transit</label>
+
+          <input type="radio" name="type" id="changemode-driving">
+          <label for="changemode-driving">Driving</label>
+        </div>
     </div>
+
     <div id="map"></div>
     &nbsp;
-    <div id="warnings-panel"></div>
+   
    
   </div>
         <!-- ============================================================== -->
@@ -362,90 +431,128 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-     <script>
-       function initMap() {
-        var markerArray = [];
+   
+    <script>
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script
+// src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-        // Instantiate a directions service.
-        var directionsService = new google.maps.DirectionsService;
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 10.3157, lng:  123.8854},
+    zoom: 13,
+    mapTypeControl:true,
+ 
+        scaleControl:true,
+        draggable: true,
+        gestureHandling:"greedy"
+  });
 
-        // Create a map and center it on Manhattan.
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: {lat: 40.771, lng: -73.974}
-        });
+  new AutocompleteDirectionsHandler(map);
+}
 
-        // Create a renderer for directions and bind it to the map.
-        var directionsDisplay = new google.maps.DirectionsRenderer({map: map});
+/**
+ * @constructor
+ */
+function AutocompleteDirectionsHandler(map) {
+  this.map = map;
+  this.originPlaceId = null;
+  this.destinationPlaceId = null;
+  this.travelMode = 'WALKING';
+  this.directionsService = new google.maps.DirectionsService;
+  this.directionsDisplay = new google.maps.DirectionsRenderer;
+  this.directionsDisplay.setMap(map);
 
-        // Instantiate an info window to hold step text.
-        var stepDisplay = new google.maps.InfoWindow;
+  var originInput = document.getElementById('origin-input');
+  var destinationInput = document.getElementById('destination-input');
+  var modeSelector = document.getElementById('mode-selector');
 
-        // Display the route between the initial start and end selections.
-        calculateAndDisplayRoute(
-            directionsDisplay, directionsService, markerArray, stepDisplay, map);
-        // Listen to change events from the start and end lists.
-        var onChangeHandler = function() {
-          calculateAndDisplayRoute(
-              directionsDisplay, directionsService, markerArray, stepDisplay, map);
-        };
-        document.getElementById('start').addEventListener('change', onChangeHandler);
-        document.getElementById('end').addEventListener('change', onChangeHandler);
-      }
-      
-      function calculateAndDisplayRoute(directionsDisplay, directionsService,
-          markerArray, stepDisplay, map) {
-        // First, remove any existing markers from the map.
-        for (var i = 0; i < markerArray.length; i++) {
-          markerArray[i].setMap(null);
+  var originAutocomplete = new google.maps.places.Autocomplete(originInput);
+  // Specify just the place data fields that you need.
+  originAutocomplete.setFields(['place_id']);
+
+  var destinationAutocomplete =
+      new google.maps.places.Autocomplete(destinationInput);
+  // Specify just the place data fields that you need.
+  destinationAutocomplete.setFields(['place_id']);
+
+  this.setupClickListener('changemode-walking', 'WALKING');
+  this.setupClickListener('changemode-transit', 'TRANSIT');
+  this.setupClickListener('changemode-driving', 'DRIVING');
+
+  this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+  this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
+      destinationInput);
+  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+}
+
+// Sets a listener on a radio button to change the filter type on Places
+// Autocomplete.
+AutocompleteDirectionsHandler.prototype.setupClickListener = function(
+    id, mode) {
+  var radioButton = document.getElementById(id);
+  var me = this;
+
+  radioButton.addEventListener('click', function() {
+    me.travelMode = mode;
+    me.route();
+  });
+};
+
+AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
+    autocomplete, mode) {
+  var me = this;
+  autocomplete.bindTo('bounds', this.map);
+
+  autocomplete.addListener('place_changed', function() {
+    var place = autocomplete.getPlace();
+
+    if (!place.place_id) {
+      window.alert('Please select an option from the dropdown list.');
+      return;
+    }
+    if (mode === 'ORIG') {
+      me.originPlaceId = place.place_id;
+    } else {
+      me.destinationPlaceId = place.place_id;
+    }
+    me.route();
+  });
+};
+
+AutocompleteDirectionsHandler.prototype.route = function() {
+  if (!this.originPlaceId || !this.destinationPlaceId) {
+    return;
+  }
+  var me = this;
+
+  this.directionsService.route(
+      {
+        origin: {'placeId': this.originPlaceId},
+        destination: {'placeId': this.destinationPlaceId},
+        travelMode: this.travelMode
+        
+
+      },
+      function(response, status) {
+        if (status === 'OK') {
+          me.directionsDisplay.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to ' + status);
         }
+      });
 
-        // Retrieve the start and end locations and create a DirectionsRequest using
-        // WALKING directions.
-        directionsService.route({
-          origin: document.getElementById('start').value,
-          destination: document.getElementById('end').value,
-          travelMode: 'WALKING'
-        }, function(response, status) {
-          // Route the directions and pass the response to a function to create
-          // markers for each step.
-          if (status === 'OK') {
-            document.getElementById('warnings-panel').innerHTML =
-                '<b>' + response.routes[0].warnings + '</b>';
-            directionsDisplay.setDirections(response);
-            showSteps(response, markerArray, stepDisplay, map);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
+};
 
-      function showSteps(directionResult, markerArray, stepDisplay, map) {
-        // For each step, place a marker, and add the text to the marker's infowindow.
-        // Also attach the marker to an array so we can keep track of it and remove it
-        // when calculating new routes.
-        var myRoute = directionResult.routes[0].legs[0];
-        for (var i = 0; i < myRoute.steps.length; i++) {
-          var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
-          marker.setMap(map);
-          marker.setPosition(myRoute.steps[i].start_location);
-          attachInstructionText(
-              stepDisplay, marker, myRoute.steps[i].instructions, map);
-        }
-      }
 
-      function attachInstructionText(stepDisplay, marker, text, map) {
-        google.maps.event.addListener(marker, 'click', function() {
-          // Open an info window when the marker is clicked on, containing the text
-          // of the step.
-          stepDisplay.setContent(text);
-          stepDisplay.open(map, marker);
-        });
-      }
+
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCB5UntvXRlD5c0WGM1qCffiEVP1cE0w6M&callback=initMap">
-    </script>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkY-GDX7J6e21_NBWq_eiV2vH7Deo0csc&libraries=places&callback=initMap"
+        async defer></script>
   
 </body>
 

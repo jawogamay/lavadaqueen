@@ -129,37 +129,7 @@
                     {{--    <li class="nav-item">
                             <a class="nav-link" href="#"><i class="fa fa-bell"></i></a>
                        </li> --}}
-                       @can('customer')
-                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href=""
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell"></i>
-                                
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox scale-up">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">Notifications</div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Status Changed</h5> <span class="mail-desc">Transaction status has benn changed</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                        
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all
-                                                notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        @endcan
+                     
                   {{--       <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
@@ -186,10 +156,7 @@
                         <!-- ============================================================== -->
                         <!-- Language -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right scale-up"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
-                        </li>
+                    
                     </ul>
                 </div>
             </nav>
@@ -244,6 +211,12 @@
                                 <router-link to="/posts" class="nav-link">
                                     <i class="nav-icon fas fa-clipboard"></i>
                                         Post
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/service" class="nav-link">
+                                    <i class="nav-icon fas fa-clipboard"></i>
+                                        Service
                                 </router-link>
                             </li>
                               <li class="nav-item">

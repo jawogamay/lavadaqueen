@@ -23,6 +23,7 @@ import VueProgressBar from 'vue-progressbar'
 import Reservation from './components/Reservation'
 import Profile from './components/Profile'
 import Setting from './components/Setting'
+import Service from './components/Service'
 import { Form, HasError, AlertError } from 'vform';
 import fullCalendar from 'vue-fullcalendar'
 import moment from 'moment'
@@ -114,8 +115,8 @@ window.Fire =  new Vue();
     {path:'/dashboard',component:Dashboard},
     {path:'/reservation',component:Reservation},
     {path:'/profile',component:Profile},
-    {path:'/setting',component:Setting}
-    
+    {path:'/setting',component:Setting},
+    {path:'/service',component:Service}
   ]
 
 const router = new VueRouter({

@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResources(['customers' => 'API\CustomerController']);
+Route::get('updateUser' , 'API\CustomerController@editUser');
 Route::apiResources(['posts' => 'PostController']);
 Route::get('viewpost','PostController@viewPost');
 Route::get('countCustomer','CountController@countCustomer');
@@ -27,5 +28,6 @@ Route::any('statuschange/{transaction}','TransactionController@editStatus');
 Route::get('getstatus','StatusController@getStatus');
 Route::get('mytransaction','TransactionController@getCustomerTransaction');
 Route::apiResources(['transactions' => 'TransactionController']);
+Route::apiResources(['services'  => 'ServiceController']);
 Route::post('rating','RateController@setrating')->name('setrating');
 Route::get('getrate','RateController@getrate')->name('getrate');

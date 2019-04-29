@@ -11,6 +11,11 @@ class CustomerController extends Controller
 {
     
 
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function index()
     {
     
@@ -56,9 +61,11 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editUser()
     {
-        //
+        $user = Auth::user()->id;
+        $editUser = User::findOrFail($user);
+        return $editUser::all();
     }
 
     /**
@@ -70,7 +77,15 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth('api')->user();
+     /*   $this->validate($request,[
+            'name' => 'required|string',
+             'email' => 'required|string|email|max:191|unique:users,email'.$user->id,
+             'password' => 'confirmed|required|min:8'
+        ]);*/
+        
+        $user->update($request->all());
+        return ['message' => "Success"];
     }
 
     /**

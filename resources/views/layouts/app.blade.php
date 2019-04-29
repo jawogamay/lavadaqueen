@@ -3,7 +3,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <style type="text/css">
+        .form-text{
+    position:relative;
+}
+input{
+    padding:5px 5px 5px 150px;
+}
+.static-value{
+    position:absolute;
+    left:-9px;
+    font-weight:bold;
+    font-size:0.8em;
+    color:#444;
+    top:7px;
+}
+    </style>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

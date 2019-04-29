@@ -2,6 +2,8 @@
 
 use App\Events\PostCreated;
 use App\Events\StatusChanged;
+use App\Notifications\TransactionChanged;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,11 @@ use App\Events\StatusChanged;
 Route::get('/', function () {
      /*PostCreated::dispatch(new Post(2));*/
     return view('welcome');
+});
+Route::get('/notiftest',function(){
+    $user = user::find(1);
+    User::find(1)->notify(new TransactionChanged);
+    return view ('welcome');
 });
 Route::get('/about-us',function(){
     return view('about');

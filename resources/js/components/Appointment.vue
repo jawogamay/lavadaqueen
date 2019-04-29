@@ -27,7 +27,7 @@
     >
       <template v-slot:items="props">
         <td>{{ props.item.customer.name }}</td>
-        <td class="text-xs-left">{{ props.item.service}}</td>
+        <td class="text-xs-left">{{ props.item.service.servicetype}}</td>
          <td class="text-xs-left">{{ props.item.weight}}</td>
           <td class="text-xs-left"><span  class="label label-warning">{{ props.item.status.name}}</span></td>
          
@@ -66,7 +66,7 @@
                        <form @submit.prevent=" updateAppointment()">
                         <div class="modal-body">
                             <input type="text" :value="form.name" class="form-control" disabled name="user"><br><br>
-                            <input type="service" :value="form.service" class="form-control" disabled name="service" > 
+                            <input type="service" :value="form.service.servicetype" class="form-control" disabled name="service" > 
                             <br>
                              <!-- <select name="status" class="form-control" v-model="form.status">
                                 <option v-for="status in statuses" :key="status.id" :value="status.id">{{status.name}}</option>
@@ -74,9 +74,9 @@
                             <br><br>
                             <input type="number" class="form-control" v-model="form.weight" name="weight" placeholder="Enter kilogram weight" style="width:100%;">
                             <br><br>
-                           <div v-if="form.service === 'Fullservice'">
+                           <div>
                             <h3>PHP: </h3>
-                                <input type="service" v-model="form.total = form.weight*23"   class="form-control" disabled name="total" >     
+                                <input type="service" v-model="form.total = form.weight*form.service.price"   class="form-control" disabled name="total" >     
                           </div> 
                           <div v-if="form.service === 'Vintage'">
                             <h3>PHP: </h3>
@@ -201,7 +201,7 @@
                         'success'
                         )
                        Fire.$emit('statusChanged')
-                     this.$Progress,finish();
+                     this.$Progress.finish();
                    
               })
             },

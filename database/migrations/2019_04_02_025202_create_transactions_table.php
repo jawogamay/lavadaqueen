@@ -17,8 +17,9 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->integer('weight')->default(0);
-            $table->string('service'); 
+            $table->unsignedInteger('service_id');
             $table->float('total')->default(0);
+            $table->string('cashstat')->default('not paid');
             $table->date('date_reserve');
             $table->unsignedInteger('status_id')->default(1);
             $table->timestamps();
