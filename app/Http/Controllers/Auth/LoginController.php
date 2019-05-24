@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class LoginController extends Controller
 {
@@ -32,6 +36,18 @@ class LoginController extends Controller
      *
      * @return void
      */
+/*     protected function authenticated(Request $request, Authenticatable $user)
+    {
+           Auth::logout();
+    $request->session()->put('verify:user:id', $user->id);
+$verification = Nexmo::verify()->start([
+    'number' => $user->phone,
+    'brand'  => 'Lovehunon'
+]);
+$request->session()->put('verify:request_id', $verification->getRequestId());
+ 
+    return redirect('verify');
+    }*/
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

@@ -6,7 +6,7 @@
                       <div class="card-header">
                         <h3 class="card-title">Transaction</h3>
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal">Add Transaction <v-icon color="#fff">add_box</v-icon></button>
+                            <button class="btn btn-success" @click="newModal" id="addtransaction">Add Transaction <v-icon color="#fff">add_box</v-icon></button>
                          </div>
                      </div>
                 </div>
@@ -53,10 +53,10 @@
                         </div>
                        <form @submit.prevent="createTransaction()">
                         <div class="modal-body">
-                            <input @change="checkDate()" id="datepicker" type="date" data-date-format="yyyy-mm-dd" name="date" v-model="form.date" class="form-control" :class="{'is-invalid': form.errors.has('date') }">
+                            <input @change="checkDate()" id="datepicker" type="date" dusk="datepicker" data-date-format="yyyy-mm-dd" name="date" v-model="form.date" class="form-control" :class="{'is-invalid': form.errors.has('date') }">
                             <has-error :form="form" field="date"></has-error>
                             <br><br>
-                            <select name="service"  v-model="form.service" class="form-control" required :class="{'is-invalid': form.errors.has('service') }">
+                            <select name="service"  v-model="form.service" class="form-control"  dusk="service" required :class="{'is-invalid': form.errors.has('service') }"  id="service">
                                 <option value="" disabled selected>--Choose service --</option>
                                 <option v-for="service in services" :value="service.id">{{service.servicetype}}</option>
                             </select>
@@ -65,7 +65,7 @@
                         </div>
                      <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" dusk="submit-transaction" id="submit">Submit</button>
                      </div>
                      </form>
                 </div>

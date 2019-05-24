@@ -1,4 +1,5 @@
 <template>
+  <v-app>
     <div class="container-fluid">
         <div class="row pt-5" v-if="$gate.laundry()">
              <div class="col-md-12">
@@ -34,10 +35,10 @@
            <td class="text-xs-left" >Php{{ props.item.total}}</td>
         <td class="text-xs-left">{{ props.item.created_at |myDate }}</td>
         <td class="text-xs-left">
-                        <a href="#" class="btn btn-primary" @click="editModal(props.item)">
+                        <a href="#" class="btn btn-primary" @click="editModal(props.item)" id="edittransact" dusk="edittransact">
                            Transact
                         </a>
-                        <a href="#" class="btn btn-warning" @click="editStatus(props.item)">
+                        <a href="#" class="btn btn-warning" @click="editStatus(props.item)" id="edit" dusk="edit">
                             Status change
                         </a>
                         <a href="#" class="btn btn-danger" @click="deleteAppointment(props.item.id)">
@@ -72,7 +73,7 @@
                                 <option v-for="status in statuses" :key="status.id" :value="status.id">{{status.name}}</option>
                             </select> -->
                             <br><br>
-                            <input type="number" class="form-control" v-model="form.weight" name="weight" placeholder="Enter kilogram weight" style="width:100%;">
+                            <input type="number" class="form-control" v-model="form.weight" name="weight" placeholder="Enter kilogram weight" style="width:100%;" id="weight" dusk="weight">
                             <br><br>
                            <div>
                             <h3>PHP: </h3>
@@ -97,7 +98,7 @@
                             </div>
                      <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submit-weight" dusk="submit-weight">Submit</button>
                      </div>
                      </form>
                 </div>
@@ -119,7 +120,7 @@
                            <h3 style="display:inline;"> Current Status:</h3> &nbsp;<span style="display:inline; color:blue;"><b>{{ this.form.current}}</b></span>
                            <br>
                            <input type="hidden" name="user" :value="form.user">
-                             <select name="status" class="form-control" v-model="form.status">
+                             <select name="status" class="form-control" v-model="form.status" id="status" dusk="status">
                                 <option v-for="status in statuses" :key="status.id" :value="status.id">{{status.name}}</option>
                 
                             </select>
@@ -128,7 +129,7 @@
                             </div>
                      <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>`
+                        <button type="submit" class="btn btn-primary" dusk="submit-status" id="submit-status">Submit</button>`
                      </div>
                      </form>
                 </div>
@@ -136,6 +137,7 @@
             
             </div>
     </div>
+  </v-app>
 </template> 
 
 <script>

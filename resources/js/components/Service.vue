@@ -1,4 +1,5 @@
 <template>
+  <v-app>
     <div class="container-fluid">
         <div class="row pt-5" v-if="$gate.laundry()">
              <div class="col-md-12">
@@ -6,7 +7,7 @@
                       <div class="card-header">
                         <h3 class="card-title">Service Table</h3>
                         <div class="card-tools">
-                            <button class="btn btn-warning" @click="newModal">Add Service <v-icon color="#fff">add_box</v-icon></button>
+                            <button class="btn btn-warning" @click="newModal" id="addservice">Add Service <v-icon color="#fff">add_box</v-icon></button>
                          </div>
                      </div>
                 </div>
@@ -58,12 +59,12 @@
                           </div>
                          <form @submit.prevent="createServices()">
                           <div class="modal-body">
-                            <input type="text" name="servicetype" v-model="form.servicetype" class="form-control" placeholder="Enter Service"><br><br>
-                            <input type="number" name="price" v-model="form.price" class="form-control" placeholder="Enter price" style="width:100%;">
+                            <input type="text" name="servicetype" v-model="form.servicetype" class="form-control" placeholder="Enter Service" dusk="service"><br><br>
+                            <input type="number" name="price" v-model="form.price" class="form-control" placeholder="Enter price" style="width:100%;" dusk="price">
                           </div>
                        <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary">Add</button>
+                          <button type="submit" class="btn btn-primary" dusk="submit" @click="createServices()">Add</button>
                        </div>
                        </form>
                   </div>
@@ -71,6 +72,7 @@
             
             </div>
     </div>
+  </v-app>
 </template> 
 
 <script>

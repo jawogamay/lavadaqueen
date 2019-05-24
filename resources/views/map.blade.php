@@ -355,7 +355,7 @@
             <br>
 
             <select id="destination-input" class="controls form-control">
-             <option value="Lavada Queen Inc. [The Professional Laundry & Cleaners]">Select Branchs</option>
+             <option value="Lavada Queen Inc. [The Professional Laundry & Cleaners]">Select Branches</option>
                
              </select>
 

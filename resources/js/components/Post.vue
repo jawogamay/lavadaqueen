@@ -1,4 +1,5 @@
 <template>
+  <v-app>
     <div class="container-fluid">
         <div class="row pt-5" v-if="$gate.laundry()">
              <div class="col-md-12">
@@ -6,7 +7,7 @@
                       <div class="card-header">
                         <h3 class="card-title">Post Table</h3>
                         <div class="card-tools">
-                            <button class="btn btn-warning" @click="newModal">Add Post <v-icon color="#fff">add_box</v-icon></button>
+                            <button class="btn btn-warning" @click="newModal" id="addpost">Add Post <v-icon color="#fff">add_box</v-icon></button>
                          </div>
                      </div>
                 </div>
@@ -36,8 +37,8 @@
 
         <td class="text-xs-left">
       
-                        <a href="#" class="btn btn-danger" @click="deletePost(props.item.id)">
-                            <i class="fa fa-trash" style="color:#ffffff;"></i>
+                        <a href="#" class="btn btn-danger" @click="deletePost(props.item.id)" id="delete">
+                            <i class="fa fa-trash" style="color:#ffffff;" dusk="delete"></i>
 
                         </a>
         </td>
@@ -67,18 +68,19 @@
                               <input type="text" class="form-control" placeholder="Enter Passenger Name" name="passenger_name" v-model="form.passenger_name"><br>   -->
                               <img :src="form.image" alt="User Avatar" width="100%"  v-if="getimage===true">
                               <br>
-                              <input type="file" class="form-control" name="image" @change="getImage" required><br><br>
-                              <input type="text" name="title" placeholder="Enter title of post" :class="{'is-invalid': form.errors.has('content') }" v-model="form.title" class="form-control">
+                              <input type="file" class="form-control" name="image" @change="getImage" required id="image" dusk="image"><br><br>
+                              <input type="text" name="title" placeholder="Enter title of post" :class="{'is-invalid': form.errors.has('content') }" v-model="form.title" class="form-control" id="title"
+                              dusk="title">
                               <has-error :form="form" field="title"></has-error>
                               <br><br>
-                              <textarea class="form-control" placeholder="Whats on your mind ?" :class="{'is-invalid': form.errors.has('content') }" style="height:200px;" name="content" v-model="form.content">
+                              <textarea class="form-control" placeholder="Whats on your mind ?" :class="{'is-invalid': form.errors.has('content') }" style="height:200px;" name="content" v-model="form.content" id="content" dusk="content">
                               </textarea>
                               <has-error :form="form" field="content"></has-error>
                           </div>
                        <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                           <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
-                          <button v-show="!editmode" type="submit" class="btn btn-primary">Post</button>
+                          <button v-show="!editmode" type="submit" class="btn btn-primary" id="submit" dusk="post-submit" @click="createPost()">Post</button>
                        </div>
                        </form>
                   </div>
@@ -86,6 +88,7 @@
             
             </div>
     </div>
+    </v-app>
 </template> 
 
 <script>

@@ -274,7 +274,7 @@
 
        <div class="page-wrapper">
 
-        <router-view></router-view>
+        <router-view dusk="components"></router-view>
     <div class="">
         <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
     </div>

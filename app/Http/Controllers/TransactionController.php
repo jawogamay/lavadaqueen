@@ -27,7 +27,7 @@ class TransactionController extends Controller
          if (\Gate::allows('laundry')) 
          {
             
-            return Transaction::latest()->with('customer','status','service')->get();
+            return Transaction::with('customer','status','service')->get();
         }
     }
 

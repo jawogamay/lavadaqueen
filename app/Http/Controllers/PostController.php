@@ -59,7 +59,7 @@ class PostController extends Controller
         ]);
         
         $post =  Post::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => 1,
             'content' => $request['content'],
             'title' => $request['title'],
             'image' => $fileName

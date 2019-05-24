@@ -48,6 +48,8 @@ Route::get('/demo',function(){
 Route::get('/fire',function(){
     event (new StatusChanged);
 });
+Route::get('/verify', 'VerifyController@show')->name('verify');
+Route::post('/verify', 'VerifyController@verify')->name('verify'); 
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');

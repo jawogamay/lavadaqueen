@@ -88,13 +88,15 @@
                             label="Enter Message"
                             single-line
                             @keyup.enter="sendMessage"
+                            id="message"
+                            dusk="message"
                     ></v-text-field>
                 </v-flex>
 
                 <v-flex xs4>
                     <v-btn
                             @click="sendMessage"
-                            dark class="mt-3 ml-2 white--text" small color="green">send</v-btn>
+                            dark class="mt-3 ml-2 white--text" small color="green">Send</v-btn>
 
 
                 </v-flex>
